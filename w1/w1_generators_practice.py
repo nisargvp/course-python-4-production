@@ -65,7 +65,7 @@ def csv_reader(file_name):
   for row in open(file_name, 'r'):
     yield row
 
-csv_gen = csv_reader("cwd/MLTollsStackOverflow.csv")
+csv_gen = csv_reader("MLTollsStackOverflow.csv")
 row_count = 0
 
 for row in csv_gen:

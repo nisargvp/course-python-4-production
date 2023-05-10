@@ -217,5 +217,58 @@ with open("my_binary_file.bin", "rb") as f:
     data = f.read()
     
 
-# @classmethod 
+# @classmethod decorator
 
+class ExampleClass:
+    count = 0
+
+    def __init__(self):
+        ExampleClass.count += 1
+
+    @classmethod
+    def get_count(cls):
+        return cls.count
+
+obj1 = ExampleClass()
+obj2 = ExampleClass()
+obj3 = ExampleClass()
+
+print(ExampleClass.get_count())  # Output: 3; because it adds 1 for each time the class is instantiated
+print(obj1.get_count())  # Output: 3
+print(obj2.get_count())  # Output: 3
+print(obj3.get_count())  # Output: 3
+
+## another @classmethod example
+
+class Car:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+
+    @classmethod
+    def from_string(cls, car_string):
+        make, model, year = car_string.split('-')
+        return cls(make, model, year)
+
+car_string = 'Tesla-Model-s'
+car = Car.from_string(car_string)
+print(car.make, car.model, car.year)
+
+
+# @staticmethod decorator
+
+class MathUtils:
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+    @staticmethod
+    def multiply(x, y):
+        return x * y
+
+result1 = MathUtils.add(5, 7)
+result2 = MathUtils.multiply(5, 7)
+
+print(result1)  # Output: 12
+print(result2)  # Output: 35

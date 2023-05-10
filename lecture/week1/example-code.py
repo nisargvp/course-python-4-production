@@ -146,18 +146,29 @@ print(cube(4))    # Output: 64
 # Sort a list of strings by length
 strings = ["apple", "banana", "cherry", "date", "fig", "grape"]
 sorted_strings = sorted(strings, key=lambda x: len(x))
-print(sorted_strings)  # Output: ['fig', 'apple', 'date', 'banana', 'cherry', 'grape']
+print(sorted_strings)  # Output: ['fig', 'date', 'apple', 'grape', 'banana', 'cherry']
+
+# Sort a list of lists by the second element in each sublist
+a = [[1,6], [8,2], [5,3], [4,9]]
+sorted(a, key=lambda x: -x[1])  # Output: [[8, 2], [5, 3], [1, 6], [4, 9]]
 
 # =============================================================================
 # Map Function
 # =============================================================================
 # Convert a list of temperatures from Celsius to Fahrenheit
 def celsius_to_fahrenheit(temp):
-    return (9/5) * temp + 32
+    return round((9/5) * temp + 32, 1)
 
 temperatures_celsius = [0, 20, 37, 100]
 temperatures_fahrenheit = list(map(celsius_to_fahrenheit, temperatures_celsius))
 print(temperatures_fahrenheit)  # Output: [32.0, 68.0, 98.6, 212.0]
+
+# Add 1 to each element in a list of integers
+b = [1,2,3,4,5,6,7,8,9,10]
+def f(x):
+    return x + 1
+
+list(map(f, b))
 
 # =============================================================================
 # Filter Function
@@ -174,6 +185,12 @@ def is_prime(num):
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 primes = list(filter(is_prime, numbers))
 print(primes)  # Output: [2, 3, 5, 7]
+
+# Return even numbers from a list of integers
+def f1(x):
+    return x % 2 == 0
+
+list(filter(f1, b))
 
 # =============================================================================
 # Reduce Function
@@ -295,6 +312,8 @@ class Platypus(Bird, Mammal):
 
 p = Platypus()
 p.speak()
+
+Platypus.mro()
 
 # =============================================================================
 # Python Encapsulation

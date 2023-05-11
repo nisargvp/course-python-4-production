@@ -69,6 +69,7 @@ class Stats:
 
     def calculate_50(self) -> None:
         self._50 = np.percentile(self._vals, 50)
+        self._median = np.percentile(self._vals, 50)
 
     def calculate_75(self) -> None:
         self._75 = np.percentile(self._vals, 75)

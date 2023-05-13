@@ -47,6 +47,8 @@ def revenue_per_region(dp: DataProcessor) -> Dict:
     # get generator from data_reader
     data_reader_gen = (row for row in dp.data_reader)
     
+    _ = next(data_reader_gen)
+    
     revenue_per_region = {}
 
     # calculate agg as we iterate through the file

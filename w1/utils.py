@@ -115,7 +115,7 @@ class DataReader:
     ######################################## YOUR CODE HERE ##################################################
         with open(self._fp, 'r') as f:
             rows = f.readlines()
-            for row in rows[1:]:
+            for row in rows:
                 row = row.strip().split(self._sep)
                 yield {self._col_names[i]: row[i] for i in range(len(self._col_names))}
     ######################################## YOUR CODE HERE ##################################################

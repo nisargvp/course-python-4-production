@@ -81,6 +81,8 @@ class DataProcessor:
         ######################################## YOUR CODE HERE ##################################################
         # get generator from data_reader
         data_reader_gen = (row for row in self.data_reader)
+        
+        _ = next(data_reader_gen)
 
         aggregate = 0
 

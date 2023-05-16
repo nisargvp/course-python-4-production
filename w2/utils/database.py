@@ -45,7 +45,23 @@ class DB:
         Read more about datatypes in Sqlite here -> https://www.sqlite.org/datatype3.html
         """
     ######################################## YOUR CODE HERE ##################################################
+        # Create a table if it doesn't exist
+        self._connection.execute(f'''CREATE TABLE IF NOT EXISTS {self._table_name}
+                             (
+                                process_id TEXT PRIMARY KEY NOT NULL, 
+                                file_name TEXT DEFAULT NULL, 
+                                file_path TEXT DEFAULT NULL, 
+                                description TEXT DEFAULT NULL, 
+                                start_time TEXT NOT NULL, 
+                                end_time TEXT DEFAULT NULL, 
+                                percentage REAL DEFAULT NULL
+                            )''')
 
+        # Save (commit) the changes
+        self._connection.commit()
+
+        # Close the connection
+        # self._connection.close()
     ######################################## YOUR CODE HERE ##################################################
 
     def insert(self, process_id, start_time, file_name=None, file_path=None,
@@ -63,7 +79,17 @@ class DB:
         :return: None
         """
     ######################################## YOUR CODE HERE ##################################################
+        # Insert a record into the table
+        self._connection.execute(f'''INSERT INTO {self._table_name} 
+                                (process_id, start_time, file_name, file_path, description, end_time, percentage) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?)''',
+                            (process_id, start_time, file_name, file_path, description, end_time, percentage))
 
+        # Save (commit) the changes
+        self._connection.commit()
+
+        # Close the connection
+        # self._connection.close()
     ######################################## YOUR CODE HERE ##################################################
 
     def read_all(self) -> List[Dict]:
@@ -95,7 +121,11 @@ class DB:
         :return: None
         """
     ######################################## YOUR CODE HERE ##################################################
-
+        # Update percentage in a record
+        self._connection.execute(f'''UPDATE {self._table_name} SET percentage='{percentage}'
+                                 WHERE process_id='{process_id}';''')
+        
+        self._connection.commit()
     ######################################## YOUR CODE HERE ##################################################
 
 

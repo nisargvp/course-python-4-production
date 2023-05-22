@@ -1,5 +1,5 @@
 import constants
-from w1.data_processor import DataProcessor
+from data_processor import DataProcessor
 from pprint import pprint
 from typing import Dict
 from tqdm import tqdm

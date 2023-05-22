@@ -165,7 +165,7 @@ def main() -> List[Dict]:
 
     ######################################## YOUR CODE HERE ##################################################
     with multiprocessing.Pool(n_processes) as pool:
-        revenue_data = pool.starmap(run, zip(batches, range(n_processes)))
+        revenue_data = pool.starmap(run, zip(batches, range(1,n_processes+1)))
         
         pool.close()
         pool.join()

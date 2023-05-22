@@ -3,7 +3,7 @@ from typing import List, Dict
 from tqdm import tqdm
 import os
 import multiprocessing
-from w1.data_processor import DataProcessor
+from data_processor import DataProcessor
 import constants
 from global_utils import get_file_name, make_dir, plot_sales_data
 import json
@@ -63,7 +63,7 @@ def get_sales_information(file_path: str) -> Dict:
 # batches the files based on the number of processes
 def batch_files(file_paths: List[str], n_processes: int) -> List[set]:
     if n_processes > len(file_paths):
-        return []
+        n_processes = len(file_paths)
 
     n_per_batch = len(file_paths) // n_processes
 
@@ -103,7 +103,7 @@ def main() -> List[Dict]:
     Use the `run` method to fetch revenue data for a given batch of files
 
     Use multiprocessing module to process batches of data in parallel
-    Check `multiprocessing.Pool` and `pool.starmap` methods to help you wit the task
+    Check `multiprocessing.Pool` and `pool.starmap` methods to help you with the task
 
     At the end check the overall time taken in this code vs the time taken in W1 code
 
@@ -144,7 +144,7 @@ def main() -> List[Dict]:
     """
 
     st = time.time()
-    n_processes = 3 # you may modify this number - check out multiprocessing.cpu_count() as well
+    n_processes = 10 # you may modify this number - check out multiprocessing.cpu_count() as well
 
     parser = argparse.ArgumentParser(description="Choose from one of these : [tst|sml|bg]")
     parser.add_argument('--type',
@@ -164,14 +164,18 @@ def main() -> List[Dict]:
     batches = batch_files(file_paths=file_paths, n_processes=n_processes)
 
     ######################################## YOUR CODE HERE ##################################################
-
+    with multiprocessing.Pool(n_processes) as pool:
+        revenue_data = pool.starmap(run, zip(batches, range(n_processes)))
+        
+        pool.close()
+        pool.join()
     ######################################## YOUR CODE HERE ##################################################
 
     en = time.time()
     print("Overall time taken : {}".format(en-st))
-
+    print("Performance improvement : {}x original".format(round(4.393972873687744/(en-st))))
     # should return revenue data
-    return [{}]
+    return revenue_data
 
 
 if __name__ == '__main__':

@@ -1,0 +1,5 @@
+2023-05-30 23:52:46,711 - root - <module> - logging_module.py - DEBUG -         9 - This is a debug message
+2023-05-30 23:52:46,711 - root - <module> - logging_module.py - INFO -         10 - This is an info message
+2023-05-30 23:52:46,711 - root - <module> - logging_module.py - WARNING -         11 - This is a warning message
+2023-05-30 23:52:46,711 - root - <module> - logging_module.py - ERROR -         12 - This is an error message
+2023-05-30 23:52:46,711 - root - <module> - logging_module.py - CRITICAL -         13 - This is a critical message
